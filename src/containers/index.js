@@ -1,2 +1,5 @@
 export { default as App } from "./App"
 export { default as MainPage } from "./MainPage"
+export { default as NewsPage } from "./NewsPage"
+export { default as ContactsPage } from "./ContactsPage"
+export { default as AboutPage } from "./AboutPage"

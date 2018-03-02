@@ -7,14 +7,14 @@ import Header from "../components/Header"
 import * as Actions from "../actions"
 import { Link, browserHistory } from "react-router"
 
-const MainPage = ({ actions, activePage }) => (
+const AboutPage = ({ actions, activePage }) => (
   <div>
     {/* <Header changeActivePage={actions.changeActivePage} activePage={activePage} /> */}
-    Main Page
+    About Page
   </div>
 )
 
-MainPage.propTypes = {
+AboutPage.propTypes = {
   actions: PropTypes.object.isRequired,
   activePage: PropTypes.string.isRequired,
 }
@@ -27,4 +27,4 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(Actions, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage)
+export default connect(mapStateToProps, mapDispatchToProps)(AboutPage)
