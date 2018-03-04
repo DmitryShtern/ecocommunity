@@ -3,16 +3,10 @@ import PropTypes from "prop-types"
 import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 
-import Header from "../components/Header"
 import * as Actions from "../actions"
 import { Link, browserHistory } from "react-router"
 
-const NewsPage = ({ actions, activePage }) => (
-  <div>
-    {/* <Header changeActivePage={actions.changeActivePage} activePage={activePage} /> */}
-    News Page
-  </div>
-)
+const NewsPage = ({ actions, activePage }) => <div>News Page</div>
 
 NewsPage.propTypes = {
   actions: PropTypes.object.isRequired,
@@ -20,7 +14,7 @@ NewsPage.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  activePage: state.header.activePage,
+  activePage: state.router.activePage,
 })
 
 const mapDispatchToProps = dispatch => ({

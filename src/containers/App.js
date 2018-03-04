@@ -7,8 +7,9 @@ import { Switch, Route } from "react-router-dom"
 import Header from "../components/Header"
 import MainPage from "./MainPage"
 import NewsPage from "./NewsPage"
-import ContactsPage from "./ContactsPage"
-import AboutPage from "./AboutPage"
+import ServicesPage from "./ServicesPage"
+import GalleryPage from "./GalleryPage"
+import NewspaperPage from "./NewspaperPage"
 import * as Actions from "../actions"
 import { Link, browserHistory } from "react-router"
 
@@ -19,8 +20,9 @@ const App = ({ actions, activePage }) => (
     <Switch>
       <Route exact path="/" component={MainPage} />
       <Route path="/news" component={NewsPage} />
-      <Route path="/contacts" component={ContactsPage} />
-      <Route path="/about" component={AboutPage} />
+      <Route path="/services" component={ServicesPage} />
+      <Route path="/gallery" component={GalleryPage} />
+      <Route path="/newspaper" component={NewspaperPage} />
     </Switch>
   </div>
 )
@@ -31,7 +33,7 @@ App.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  activePage: state.header.activePage,
+  activePage: state.router.activePage,
 })
 
 const mapDispatchToProps = dispatch => ({

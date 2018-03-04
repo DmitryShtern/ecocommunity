@@ -1,8 +1,8 @@
 import { CHANGE_ACTIVE_PAGE } from "../constants/ActionTypes"
-import { MAIN } from "../constants/NavigationMenuLabels"
+import { NavMenuButtons } from "../constants/NavMenuButtons"
 
 const initialState = {
-  activePage: MAIN,
+  activePage: NavMenuButtons[0].link,
 }
 
 export default function navigationMenu(state = initialState, action) {

@@ -1,5 +1,6 @@
 export { default as App } from "./App"
 export { default as MainPage } from "./MainPage"
 export { default as NewsPage } from "./NewsPage"
-export { default as ContactsPage } from "./ContactsPage"
-export { default as AboutPage } from "./AboutPage"
+export { default as ServicesPage } from "./ServicesPage"
+export { default as GalleryPage } from "./GalleryPage"
+export { default as NewspaperPage } from "./NewspaperPage"

@@ -7,24 +7,19 @@ import Header from "../components/Header"
 import * as Actions from "../actions"
 import { Link, browserHistory } from "react-router"
 
-const ContactsPage = ({ actions, activePage }) => (
-  <div>
-    {/* <Header changeActivePage={actions.changeActivePage} activePage={activePage} /> */}
-    Contacts Page
-  </div>
-)
+const GalleryPage = ({ actions, activePage }) => <div>Gallery Page</div>
 
-ContactsPage.propTypes = {
+GalleryPage.propTypes = {
   actions: PropTypes.object.isRequired,
   activePage: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = state => ({
-  activePage: state.header.activePage,
+  activePage: state.router.activePage,
 })
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(Actions, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactsPage)
+export default connect(mapStateToProps, mapDispatchToProps)(GalleryPage)

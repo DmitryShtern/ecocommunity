@@ -7,9 +7,9 @@ import { Header } from "../components"
 import * as Actions from "../actions"
 import { Link, browserHistory } from "react-router"
 
-const MainPage = ({ actions, activePage }) => <div>Main Page</div>
+const ServicesPage = ({ actions, activePage }) => <div>Services Page</div>
 
-MainPage.propTypes = {
+ServicesPage.propTypes = {
   actions: PropTypes.object.isRequired,
   activePage: PropTypes.string.isRequired,
 }
@@ -22,4 +22,4 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(Actions, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage)
+export default connect(mapStateToProps, mapDispatchToProps)(ServicesPage)

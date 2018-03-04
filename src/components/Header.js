@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
-import { MAIN, NEWS, CONTACTS, ABOUT } from "../constants/NavigationMenuLabels"
+import { NavMenuButtons } from "../constants/NavMenuButtons"
 
 export default class Header extends Component {
   static propTypes = {
@@ -15,6 +15,8 @@ export default class Header extends Component {
   }
 
   render() {
+    // STYLED CONTAINER //
+
     const getColor = (props, type) => {
       const isActivePage = props.page === this.props.activePage
       switch (type) {
@@ -60,38 +62,24 @@ export default class Header extends Component {
       }
     `
 
+    // NAVIGATION MENU GENERATION //
+
+    const NavMenu = NavMenuButtons.map((button, idx) => (
+      <NavLi key={idx} float={button.float}>
+        <NavLink
+          to={button.link}
+          page={button.link}
+          onClick={() => this.handleChangeActivePage(button.link)}
+        >
+          {button.label}
+        </NavLink>
+      </NavLi>
+    ))
+
     return (
       <header className="header">
         Header
-        <NavUl>
-          <NavLi>
-            <NavLink to="/" page={MAIN} onClick={() => this.handleChangeActivePage(MAIN)}>
-              Main
-            </NavLink>
-          </NavLi>
-
-          <NavLi>
-            <NavLink to="/news" page={NEWS} onClick={() => this.handleChangeActivePage(NEWS)}>
-              News
-            </NavLink>
-          </NavLi>
-
-          <NavLi>
-            <NavLink
-              to="/contacts"
-              page={CONTACTS}
-              onClick={() => this.handleChangeActivePage(CONTACTS)}
-            >
-              Contacts
-            </NavLink>
-          </NavLi>
-
-          <NavLi float="right">
-            <NavLink to="/about" page={ABOUT} onClick={() => this.handleChangeActivePage(ABOUT)}>
-              About
-            </NavLink>
-          </NavLi>
-        </NavUl>
+        <NavUl>{NavMenu}</NavUl>
       </header>
     )
   }

@@ -7,24 +7,19 @@ import Header from "../components/Header"
 import * as Actions from "../actions"
 import { Link, browserHistory } from "react-router"
 
-const AboutPage = ({ actions, activePage }) => (
-  <div>
-    {/* <Header changeActivePage={actions.changeActivePage} activePage={activePage} /> */}
-    About Page
-  </div>
-)
+const NewspaperPage = ({ actions, activePage }) => <div>Newspaper Page</div>
 
-AboutPage.propTypes = {
+NewspaperPage.propTypes = {
   actions: PropTypes.object.isRequired,
   activePage: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = state => ({
-  activePage: state.header.activePage,
+  activePage: state.router.activePage,
 })
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(Actions, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(AboutPage)
+export default connect(mapStateToProps, mapDispatchToProps)(NewspaperPage)
