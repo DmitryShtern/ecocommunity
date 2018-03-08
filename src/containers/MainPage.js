@@ -3,11 +3,27 @@ import PropTypes from "prop-types"
 import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 
-import { Header } from "../components"
-import * as Actions from "../actions"
-import { Link, browserHistory } from "react-router"
+import Slider from "react-slick"
+// @import "~slick-carousel/slick/slick.css";
 
-const MainPage = ({ actions, activePage }) => <div>Main Page</div>
+// import { LastNewsSlider } from "../components"
+import * as Actions from "../actions"
+import LastNewsSlider from "../components/LastNewsSlider"
+
+// const settings = {
+//   dots: true,
+//   infinite: true,
+//   speed: 500,
+//   slidesToShow: 1,
+//   slidesToScroll: 1,
+// }
+
+const MainPage = ({ actions, activePage }) => (
+  <div>
+    Main Page
+    <LastNewsSlider />
+  </div>
+)
 
 MainPage.propTypes = {
   actions: PropTypes.object.isRequired,

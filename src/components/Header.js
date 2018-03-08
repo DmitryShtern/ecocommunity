@@ -22,13 +22,12 @@ export default class Header extends Component {
       switch (type) {
         case "background":
           return isActivePage ? "#5bad5f" : "#444"
-          break
         case ":hover":
           return isActivePage ? "#478e4a" : "#333"
-          break
         case ":active":
           return isActivePage ? "#447746" : "#222"
-          break
+        default:
+          return "#fff"
       }
     }
 
