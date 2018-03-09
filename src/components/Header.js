@@ -1,7 +1,8 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
+import { Link } from "react-router-dom"
 import styled from "styled-components"
-import { MAIN, NEWS, CONTACTS, ABOUT } from "../constants/NavigationMenuLabels"
+import { NavMenuButtons } from "../constants/NavMenuButtons"
 
 export default class Header extends Component {
   static propTypes = {
@@ -14,63 +15,71 @@ export default class Header extends Component {
   }
 
   render() {
-    const getBGColor = props => (props.page === this.props.activePage ? "#4CAF50" : "#333")
-    const getHoverBGColor = props => (props.page === this.props.activePage ? "#4CAF50" : "#111")
+    // STYLED CONTAINER //
+
+    const getColor = (props, type) => {
+      const isActivePage = props.page === this.props.activePage
+      switch (type) {
+        case "background":
+          return isActivePage ? "#5bad5f" : "#444"
+        case ":hover":
+          return isActivePage ? "#478e4a" : "#333"
+        case ":active":
+          return isActivePage ? "#447746" : "#222"
+        default:
+          return "#fff"
+      }
+    }
 
     const NavUl = styled.ul`
       list-style-type: none;
       margin: 0;
       padding: 0;
       overflow: hidden;
-      background-color: #333;
+      background-color: #444;
     `
 
     const NavLi = styled.li`
       float: ${props => props.float || "left"};
     `
 
-    const NavA = styled.a`
+    const NavLink = styled(Link)`
       font-weight: bold;
-      display: block;
       color: white;
+      display: block;
       text-align: center;
       padding: 14px 16px;
       text-decoration: none;
-      background-color: ${getBGColor};
+      background-color: ${props => getColor(props, "background")};
+      cursos: pointer;
 
       :hover {
-        background-color: ${getHoverBGColor};
+        background-color: ${props => getColor(props, ":hover")};
+      }
+
+      :active {
+        background-color: ${props => getColor(props, ":active")};
       }
     `
 
+    // NAVIGATION MENU GENERATION //
+
+    const NavMenu = NavMenuButtons.map((button, idx) => (
+      <NavLi key={idx} float={button.float}>
+        <NavLink
+          to={button.link}
+          page={button.link}
+          onClick={() => this.handleChangeActivePage(button.link)}
+        >
+          {button.label}
+        </NavLink>
+      </NavLi>
+    ))
+
     return (
       <header className="header">
-        <NavUl>
-          <NavLi>
-            <NavA page={MAIN} href="#home" onClick={() => this.handleChangeActivePage(MAIN)}>
-              Home
-            </NavA>
-          </NavLi>
-          <NavLi>
-            <NavA page={NEWS} href="#news" onClick={() => this.handleChangeActivePage(NEWS)}>
-              News
-            </NavA>
-          </NavLi>
-          <NavLi>
-            <NavA
-              page={CONTACTS}
-              href="#contacts"
-              onClick={() => this.handleChangeActivePage(CONTACTS)}
-            >
-              Contacts
-            </NavA>
-          </NavLi>
-          <NavLi float="right">
-            <NavA page={ABOUT} href="#about" onClick={() => this.handleChangeActivePage(ABOUT)}>
-              About
-            </NavA>
-          </NavLi>
-        </NavUl>
+        Header
+        <NavUl>{NavMenu}</NavUl>
       </header>
     )
   }

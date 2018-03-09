@@ -3,17 +3,13 @@ import PropTypes from "prop-types"
 import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 
+import Header from "../components/Header"
 import * as Actions from "../actions"
-import LastNewsSlider from "../components/LastNewsSlider"
+import { Link, browserHistory } from "react-router"
 
-const MainPage = ({ actions, activePage }) => (
-  <div>
-    Main Page
-    <LastNewsSlider />
-  </div>
-)
+const GalleryPage = ({ actions, activePage }) => <div>Gallery Page</div>
 
-MainPage.propTypes = {
+GalleryPage.propTypes = {
   actions: PropTypes.object.isRequired,
   activePage: PropTypes.string.isRequired,
 }
@@ -26,4 +22,4 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(Actions, dispatch),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage)
+export default connect(mapStateToProps, mapDispatchToProps)(GalleryPage)
