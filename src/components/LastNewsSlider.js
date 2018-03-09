@@ -1,7 +1,5 @@
 import React, { Component } from "react"
 import styled from "styled-components"
-// import Slider from "react-slick"
-// import Slideshow from "react-slidez"
 
 import image1 from "./slider/images/image1.jpg"
 import image2 from "./slider/images/image2.jpg"

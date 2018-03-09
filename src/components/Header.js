@@ -51,6 +51,7 @@ export default class Header extends Component {
       padding: 14px 16px;
       text-decoration: none;
       background-color: ${props => getColor(props, "background")};
+      cursos: pointer;
 
       :hover {
         background-color: ${props => getColor(props, ":hover")};
