@@ -4,9 +4,15 @@ import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 
 import * as Actions from "../actions"
-import { Link, browserHistory } from "react-router"
+// import { Link, browserHistory } from "react-router"
+import { NewsFeed } from "../components"
 
-const NewsPage = ({ actions, activePage }) => <div>News Page</div>
+const NewsPage = ({ actions, activePage }) => (
+  <div>
+    {/* News Page */}
+    <NewsFeed />
+  </div>
+)
 
 NewsPage.propTypes = {
   actions: PropTypes.object.isRequired,

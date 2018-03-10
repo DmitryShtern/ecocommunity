@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 import { Switch, Route } from "react-router-dom"
 
-import Header from "../components/Header"
+import { Header } from "../components"
 import MainPage from "./MainPage"
 import NewsPage from "./NewsPage"
 import ServicesPage from "./ServicesPage"
@@ -15,7 +15,7 @@ import { Link, browserHistory } from "react-router"
 
 const App = ({ actions, activePage }) => (
   <div>
-    App
+    {/* App */}
     <Header changeActivePage={actions.changeActivePage} activePage={activePage} />
     <Switch>
       <Route exact path="/" component={MainPage} />

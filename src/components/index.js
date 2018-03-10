@@ -1,3 +1,5 @@
-export { Header } from "./Header"
-export { LastNewsSlider } from "./LastNewsSlider"
-// export { default as Page } from "./Page"
+export { default as Header } from "./Header"
+export { default as LastNewsSlider } from "./LastNewsSlider"
+export { default as About } from "./About"
+export { default as Contacts } from "./Contacts"
+export { default as NewsFeed } from "./NewsFeed"

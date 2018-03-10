@@ -78,7 +78,7 @@ export default class Header extends Component {
 
     return (
       <header className="header">
-        Header
+        {/* Header */}
         <NavUl>{NavMenu}</NavUl>
       </header>
     )
