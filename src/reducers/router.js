@@ -13,5 +13,3 @@ export default function navigationMenu(state = initialState, action) {
       return state
   }
 }
-
-// lib: redux-action (createAction(s))

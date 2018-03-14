@@ -41,21 +41,12 @@ const News = [
   },
   {
     id: 4,
-    title: "ЗАВОД ПО ПЕРЕРАБОТКЕ МУСОРА В СОЧИ: СТАРТ ДАН",
+    title: "ЗАВОД ПО ПЕРЕРАБОТКЕ МУСОРА В СОЧИ: СТАРТ ДАН ",
     description: "description4",
     date: "2018-01-04",
     preview: PrevImages[4] || Logo,
     album_id: 4,
     tags: ["tag1", "tag4"],
-  },
-  {
-    id: 5,
-    title: "title5",
-    description: "description5",
-    date: "2018-01-05",
-    preview: PrevImages[5] || Logo,
-    album_id: 5,
-    tags: ["tag4", "tag2"],
   },
 ]
 
