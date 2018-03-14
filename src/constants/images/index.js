@@ -12,6 +12,11 @@ import prev2 from "./prev2.jpg"
 import prev3 from "./prev3.jpg"
 import prev4 from "./prev4.jpg"
 
+import search from "./search.jpg"
+import whiteSearch from "./whiteSearch.jpg"
+
 export const Logo = logo
 export const LastNewsImages = [lastNews0, lastNews1, lastNews2, lastNews3, lastNews4]
 export const PrevImages = [prev0, prev1, prev2, prev3, prev4]
+export const SearchImage = search
+export const WhiteSearchImage = whiteSearch

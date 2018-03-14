@@ -1,13 +1,16 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
-import { default as News } from "../constants/News"
+import { News } from "../constants"
+import { NewsArray, NewsArticle } from "./"
 
 export default class NewsFeed extends Component {
   constructor(props) {
     super(props)
     this.state = {
       news: News,
+      response: true,
+      newsArticleIsOpen: true,
     }
   }
 
@@ -21,15 +24,6 @@ export default class NewsFeed extends Component {
       background-color: #f9f9e0;
       position: absolute;
       left: 5%;
-    `
-
-    const Filter = styled.div`
-      margin: 3% 0;
-      width: 20%;
-      height: 500px;
-      background-color: #f9f9e0;
-      position: fixed;
-      right: 5%;
     `
 
     const News = styled.div`
@@ -86,6 +80,10 @@ export default class NewsFeed extends Component {
         color: #49d851;
         text-decoration: underline;
       }
+
+      :active {
+        color: #478e4a;
+      }
     `
 
     const NewsInfoDiv = styled.div`
@@ -95,46 +93,65 @@ export default class NewsFeed extends Component {
       color: #fff;
     `
 
-    const NewsArray = this.state.news.map(news => {
-      // if (news.title.length > 50) {
-      //   news.title = news.title.slice(0, 50) + "..."
+    const NewsNotFound = styled.div`
+      top: 7px;
+      text-align: center;
+      font-size: 2vw;
+      position: relative;
+    `
+
+    // const NewsArray = this.state.news.map(news => {
+    //   // if (news.title.length > 50) {
+    //   //   news.title = news.title.slice(0, 50) + "..."
+    //   // }
+    //   const description =
+    //     news.description.length > 400
+    //       ? news.description.slice(0, 400) + "... "
+    //       : news.description + " "
+    //   const date =
+    //     news.date.substr(8, 2) + "." + news.date.substr(5, 2) + "." + news.date.substr(0, 4)
+    //   const tags = news.tags.map((tag, idx) => {
+    //     return <NewsMore key={idx}>{tag} </NewsMore>
+    //   })
+
+    //   return (
+    //     <News key={news.id}>
+    //       <NewsPreview src={news.preview} />
+    //       <NewsMask>
+    //         <NewsTitle>{news.title}</NewsTitle>
+    //       </NewsMask>
+    //       <NewsDescription>
+    //         {description}
+    //         <NewsMore>Открыть новость</NewsMore>
+    //       </NewsDescription>
+    //       <NewsInfoDiv position={"left"}>Тэги: {tags}</NewsInfoDiv>
+    //       <NewsInfoDiv position={"right"}>
+    //         Дата: <NewsMore>{date}</NewsMore>
+    //       </NewsInfoDiv>
+    //     </News>
+    //   )
+    // })
+
+    const Content = () => {
+      if (this.state.response) {
+        if (this.state.articleIsOpen) {
+          return <NewsArticle />
+        } else {
+          return <NewsArray />
+        }
+      } else {
+        return <NewsNotFound>По данному запросу новости не найдены!</NewsNotFound>
+      }
+
+      // if (this.state.articleIsOpen) {
+      //   return NewsArticle
+      // } else if (this.state.news.length > 0) {
+      //   return NewsArray
+      // } else {
+      //   return <NewsNotFound>По данному запросу новости не найдены!</NewsNotFound>
       // }
-      news.description =
-        news.description.length > 400
-          ? news.description.slice(0, 400) + "... "
-          : news.description + " "
-      news.date =
-        news.date.substr(8, 2) + "." + news.date.substr(5, 2) + "." + news.date.substr(0, 4)
-      news.tags = news.tags.map(tag => {
-        return <NewsMore>{tag} </NewsMore>
-      })
+    }
 
-      return (
-        <News key={news.id}>
-          <NewsPreview src={news.preview} />
-          <NewsMask>
-            <NewsTitle>{news.title}</NewsTitle>
-          </NewsMask>
-          <NewsDescription>
-            {news.description}
-            <NewsMore>Открыть новость</NewsMore>
-          </NewsDescription>
-          <NewsInfoDiv position={"left"}>Тэги: {news.tags}</NewsInfoDiv>
-          <NewsInfoDiv position={"right"}>
-            Дата: <NewsMore>{news.date}</NewsMore>
-          </NewsInfoDiv>
-        </News>
-      )
-    })
-
-    return (
-      <div>
-        {/* "NewsFeed" */}
-        <Feed>{NewsArray}</Feed>
-        <Filter>
-          'Filter'<br />
-        </Filter>
-      </div>
-    )
+    return <Feed>{Content()}</Feed>
   }
 }
