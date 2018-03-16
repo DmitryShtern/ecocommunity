@@ -65,14 +65,14 @@ const articleActions = handleAction(
 //   // initialState.news,
 // )
 
-// const newsArticleActions = handleAction(
+// const articleActions = handleAction(
 //   NEWS_ARTICLE_GET,
 //   (_, { payload }) => payload,
 //   null,
 //   // {
 //   //   [NEWS_LOAD]: state => News,
 //   // },
-//   // initialState.newsArticle,
+//   // initialState.article,
 // )
 
 export default combineReducers({
@@ -83,11 +83,11 @@ export default combineReducers({
 // Selectors
 
 export const getNews = state => state.news
-export const getNewsArticle = state => state.newsArticle
+export const getArticle = state => state.article
 
 // const initialState = {
 //   news: [],
-//   newsArticle: null,
+//   article: null,
 // }
 
 // // Reducers

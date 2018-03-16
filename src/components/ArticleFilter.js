@@ -148,26 +148,26 @@ export default class NewsArticleFilter extends Component {
           <FilterOptions>
             NewsArticleFilter
             {/* <Label>Отфильтровать:</Label> */}
-            {/* <SearchDiv>
-              <SearchInput type={"text"} placeholder={"Поиск записи..."} />
-              <SearchButton />
-              <img
-                style={{ display: "inline" }}
-                src={"http://worldartsme.com/images/search-button-clipart-1.jpg"}
-                width={"30px"}
-                height={"30px"}
-              />
-            </SearchDiv>
-            <SearchDiv>
-              По дате:
-              <br />
-              С <FilterDate />
-              <br />
-              По <FilterDate />
-            </SearchDiv>
-            <SearchDiv>
-              По тэгам:
-              <select multiple>{FilterTags}</select>
+            {/* <SearchDiv> 
+              <SearchInput type={"text"} placeholder={"Поиск записи..."} /> 
+              <SearchButton /> 
+              <img 
+                style={{ display: "inline" }} 
+                src={"http://worldartsme.com/images/search-button-clipart-1.jpg"} 
+                width={"30px"} 
+                height={"30px"} 
+              /> 
+            </SearchDiv> 
+            <SearchDiv> 
+              По дате: 
+              <br /> 
+              С <FilterDate /> 
+              <br /> 
+              По <FilterDate /> 
+            </SearchDiv> 
+            <SearchDiv> 
+              По тэгам: 
+              <select multiple>{FilterTags}</select> 
             </SearchDiv> */}
           </FilterOptions>
         </Filter>

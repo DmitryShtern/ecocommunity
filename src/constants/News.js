@@ -48,6 +48,15 @@ const News = [
     album_id: 4,
     tags: ["tag1", "tag4"],
   },
+  {
+    id: 5,
+    title: "title5",
+    description: "description5",
+    date: "2018-01-05",
+    preview: PrevImages[5] || Logo,
+    album_id: 5,
+    tags: ["tag4", "tag2"],
+  },
 ]
 
 export default News

@@ -17,13 +17,13 @@ const NewsPage = ({ actions, activePage }) => (
 NewsPage.propTypes = {
   actions: PropTypes.object.isRequired,
   // news: PropTypes.array.isRequired,
-  // newsArticleIsOpen: PropTypes.bool.isRequired,
+  // articleIsOpen: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = state => ({
   activePage: state.router.activePage,
   // news: state.newsPage.news,
-  // newsArticleIsOpen: state.newsPage.newsArticleIsOpen,
+  // articleIsOpen: state.newsPage.articleIsOpen,
 })
 
 const mapDispatchToProps = dispatch => ({
