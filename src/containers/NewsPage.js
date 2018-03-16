@@ -16,11 +16,14 @@ const NewsPage = ({ actions, activePage }) => (
 
 NewsPage.propTypes = {
   actions: PropTypes.object.isRequired,
-  activePage: PropTypes.string.isRequired,
+  // news: PropTypes.array.isRequired,
+  // newsArticleIsOpen: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = state => ({
   activePage: state.router.activePage,
+  // news: state.newsPage.news,
+  // newsArticleIsOpen: state.newsPage.newsArticleIsOpen,
 })
 
 const mapDispatchToProps = dispatch => ({
