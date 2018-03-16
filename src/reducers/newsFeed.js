@@ -1,30 +1,34 @@
 import { combineReducers } from "redux"
-import { handleActions } from "redux-actions"
+import { handleAction, handleActions } from "redux-actions"
 import { NEWS_LOAD, ARTICLE_LOAD, loadNews, loadArticle } from "../actions"
 import { News } from "../constants"
-
-const initialState = {
-  news: [],
-  article: null,
-}
+import NewsFeed from "../components"
 
 // Reducers
 
-const newsActions = handleAction(
-  loadNews,
-  (state, action) => ({
-    news: News,
-  }),
-  initialState,
-)
+// const news = handleAction(NEWS_LOAD, (_, action) => action.payload, [])
+const news = handleAction(NEWS_LOAD, (_, action) => News, [])
 
-const articleActions = handleAction(
-  loadArticle,
-  (state, action) => ({
-    article: action.article,
-  }),
-  initialState,
-)
+// const article = handleAction(ARTICLE_LOAD, (_, action) => News[action.payload], "")
+
+export default combineReducers({
+  news,
+  // article,
+})
+
+// Selectors
+
+export const getNews = state => state.news
+// export const getArticle = state => state.article
+
+// const isFetching = handleActions(
+//   {
+//     [ARTICLE_LOAD]: () => true,
+//     [SUCSESS]: () => false,
+//     [FALL]: () => false,
+//   },
+//   false,
+// )
 
 // HandelActionS example:
 
@@ -74,16 +78,6 @@ const articleActions = handleAction(
 //   // },
 //   // initialState.article,
 // )
-
-export default combineReducers({
-  newsActions,
-  articleActions,
-})
-
-// Selectors
-
-export const getNews = state => state.news
-export const getArticle = state => state.article
 
 // const initialState = {
 //   news: [],

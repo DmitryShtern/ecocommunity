@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
+import { Link } from "react-router-dom"
 import { default as News } from "../constants/News"
 
 export default class NewsArticle extends Component {
@@ -60,7 +61,7 @@ export default class NewsArticle extends Component {
       font-size: 1.2vw;
     `
 
-    const NewsMore = styled.label`
+    const NewsLink = styled(Link)`
       color: #57bf5d;
       cursor: pointer;
 
@@ -81,6 +82,13 @@ export default class NewsArticle extends Component {
       color: #fff;
     `
 
+    const NewsNotFound = styled.div`
+      top: 7px;
+      text-align: center;
+      font-size: 2vw;
+      position: relative;
+    `
+
     const NewsArray = this.state.news.map(news => {
       // if (news.title.length > 50) {
       //   news.title = news.title.slice(0, 50) + "..."
@@ -92,7 +100,11 @@ export default class NewsArticle extends Component {
       const date =
         news.date.substr(8, 2) + "." + news.date.substr(5, 2) + "." + news.date.substr(0, 4)
       const tags = news.tags.map((tag, idx) => {
-        return <NewsMore key={idx}>{tag} </NewsMore>
+        return (
+          <NewsLink key={idx} to={"/news/" + news.id} page={"/news/" + news.id}>
+            {tag}
+          </NewsLink>
+        )
       })
 
       return (
@@ -103,16 +115,28 @@ export default class NewsArticle extends Component {
           </NewsMask>
           <NewsDescription>
             {description}
-            <NewsMore>Открыть новость</NewsMore>
+            <NewsLink to={"/news/" + news.id} page={"/news/" + news.id}>
+              >Открыть новость
+            </NewsLink>
           </NewsDescription>
           <NewsInfoDiv position={"left"}>Тэги: {tags}</NewsInfoDiv>
           <NewsInfoDiv position={"right"}>
-            Дата: <NewsMore>{date}</NewsMore>
+            Дата:{" "}
+            <NewsLink to={"/news/" + news.id} page={"/news/" + news.id}>
+              {date}
+            </NewsLink>
           </NewsInfoDiv>
         </News>
       )
     })
 
-    return NewsArray
+    const content =
+      this.state.news.length > 0 ? (
+        NewsArray
+      ) : (
+        <NewsNotFound>По данному запросу новости не найдены!</NewsNotFound>
+      )
+
+    return content
   }
 }

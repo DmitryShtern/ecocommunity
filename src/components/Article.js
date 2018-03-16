@@ -1,31 +1,22 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
-import { default as News } from "../constants/News"
+import { News } from "../constants"
 
-export default class NewsArticle extends Component {
+export default class Article extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      // news: News,
+      article: News[props.match.params.articleId],
     }
   }
 
   static propTypes = {}
 
   render() {
-    const Feed = styled.div`
-      margin: 3% 0;
-      width: 65%;
-      height: ${this.state.news.length * 550 + 50}px;
-      background-color: #f9f9e0;
-      position: absolute;
-      left: 5%;
-    `
-
-    const News = styled.div`
+    const Article = styled.div`
       margin: 50px 5%;
-      height: 500px;
+      padding-bottom: 50px;
       background-color: #333;
       color: #fff;
       position: relative;
@@ -33,23 +24,23 @@ export default class NewsArticle extends Component {
       font-family: Arial;
     `
 
-    const NewsPreview = styled.img`
+    const ArticlePreview = styled.img`
       width: 100%;
-      height: 300px;
+      height: 400px;
       object-fit: cover;
     `
 
-    const NewsMask = styled.div`
+    const ArticleMask = styled.div`
       background: linear-gradient(#0000, #000d);
       color: #fff;
       width: 100%;
-      height: 300px;
+      height: 400px;
       position: absolute;
       top: 0;
       cursor: pointer;
     `
 
-    const NewsTitle = styled.label`
+    const ArticleTitle = styled.label`
       position: absolute;
       left: 20px;
       bottom: 20px;
@@ -62,14 +53,13 @@ export default class NewsArticle extends Component {
       }
     `
 
-    const NewsDescription = styled.div`
+    const ArticleDescription = styled.div`
       margin: 15px 25px;
-      height: 165px;
       color: #fff;
       font-size: 1.2vw;
     `
 
-    const NewsMore = styled.label`
+    const ArticleMore = styled.label`
       color: #57bf5d;
       cursor: pointer;
 
@@ -83,61 +73,47 @@ export default class NewsArticle extends Component {
       }
     `
 
-    const NewsInfoDiv = styled.div`
+    const ArticleInfoDiv = styled.div`
       position: absolute;
       ${props => props.position}: 25px;
       bottom: 25px;
       color: #fff;
     `
 
-    const NewsNotFound = styled.div`
+    const ArticleNotFound = styled.div`
       top: 7px;
       text-align: center;
       font-size: 2vw;
       position: relative;
     `
 
-    const NewsArray = this.state.news.map(news => {
-      // if (news.title.length > 50) {
-      //   news.title = news.title.slice(0, 50) + "..."
-      // }
-      news.description =
-        news.description.length > 400
-          ? news.description.slice(0, 400) + "... "
-          : news.description + " "
-      news.date =
-        news.date.substr(8, 2) + "." + news.date.substr(5, 2) + "." + news.date.substr(0, 4)
-      news.tags = news.tags.map((tag, idx) => {
-        return <NewsMore key={idx}>{tag} </NewsMore>
+    const Content = () => {
+      const article = this.state.article
+      article.date =
+        this.state.article.date.substr(8, 2) +
+        "." +
+        this.state.article.date.substr(5, 2) +
+        "." +
+        this.state.article.date.substr(0, 4)
+      article.tags = this.state.article.tags.map((tag, idx) => {
+        return <ArticleMore key={idx}>{tag} </ArticleMore>
       })
 
       return (
-        <News key={news.id}>
-          <NewsPreview src={news.preview} />
-          <NewsMask>
-            <NewsTitle>{news.title}</NewsTitle>
-          </NewsMask>
-          <NewsDescription>
-            {news.description}
-            <NewsMore>Открыть новость</NewsMore>
-          </NewsDescription>
-          <NewsInfoDiv position={"left"}>Тэги: {news.tags}</NewsInfoDiv>
-          <NewsInfoDiv position={"right"}>
-            Дата: <NewsMore>{news.date}</NewsMore>
-          </NewsInfoDiv>
-        </News>
+        <Article key={article.id}>
+          <ArticlePreview src={article.preview} />
+          <ArticleMask>
+            <ArticleTitle>{article.title}</ArticleTitle>
+          </ArticleMask>
+          <ArticleDescription>{article.description}</ArticleDescription>
+          <ArticleInfoDiv position={"left"}>Тэги: {article.tags}</ArticleInfoDiv>
+          <ArticleInfoDiv position={"right"}>
+            Дата: <ArticleMore>{article.date}</ArticleMore>
+          </ArticleInfoDiv>
+        </Article>
       )
-    })
+    }
 
-    const NewsArticle = {}
-
-    const FeedNews =
-      this.state.news.length > 0 ? (
-        NewsArray
-      ) : (
-        <NewsNotFound>По данному запросу новости не найдены!</NewsNotFound>
-      )
-
-    return <div>{NewsArticle}</div>
+    return <div>{Content()}</div>
   }
 }

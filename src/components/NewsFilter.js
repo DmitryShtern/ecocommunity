@@ -1,8 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
-import { SearchImage } from "../constants/images"
-import { WhiteSearchImage } from "../constants/images"
+import { SearchImage, SearchWhiteImage } from "../constants/images"
 import { Tags } from "../constants"
 
 export default class Filter extends Component {
@@ -110,12 +109,12 @@ export default class Filter extends Component {
 
       :hover {
         background-color: #478e4a;
-        background-image: url(${WhiteSearchImage});
+        background-image: url(${SearchWhiteImage});
       }
 
       :active {
         background-color: #5bad5f;
-        background-image: url(${WhiteSearchImage});
+        background-image: url(${SearchWhiteImage});
       }
     `
 
