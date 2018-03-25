@@ -1,14 +1,14 @@
 import React, { Component } from "react"
-import { NewsFeed, Filter } from "../components"
+import { Feed, Filter } from "../components"
 
 class newsScreen extends Component {
   render() {
-    const { news, article, loadNews, loadArticle } = this.props
+    const { news, article, getNews, getArticle } = this.props
 
     return (
       <div>
-        <NewsFeed news={news} article={article} loadNews={loadNews} loadArticle={loadArticle} />
-        <Filter />
+        <Feed news={news} article={article} getNews={getNews} getArticle={getArticle} />
+        <Filter getNews={getNews} />
       </div>
     )
   }

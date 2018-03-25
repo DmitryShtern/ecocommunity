@@ -27,7 +27,7 @@ App.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  activePage: state.router.activePage,
+  activePage: state.header.activePage,
 })
 
 const mapDispatchToProps = {

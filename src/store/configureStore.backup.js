@@ -1,16 +1,10 @@
-import { createStore, combineReducers, applyMiddleware } from "redux"
+import { createStore, applyMiddleware } from "redux"
 import { createLogger } from "redux-logger"
-import createHistory from "history/createBrowserHistory"
 import rootReducer from "../reducers"
-import { ConnectedRouter, routerReducer, routerMiddleware, push } from "react-router-redux"
 
-const logger = createLogger()
-export const history = createHistory()
-
-export default function configureStore() {
-  // const middleware = routerMiddleware(history)
-
-  const store = createStore(rootReducer, applyMiddleware(logger))
+export default function configureStore(initialState) {
+  const logger = createLogger()
+  const store = createStore(rootReducer, initialState, applyMiddleware(logger))
 
   if (module.hot) {
     module.hot.accept(rootReducer, () => {

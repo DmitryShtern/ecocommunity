@@ -16,17 +16,8 @@ const MainPage = ({ actions, activePage }) => (
   </div>
 )
 
-MainPage.propTypes = {
-  actions: PropTypes.object.isRequired,
-  activePage: PropTypes.string.isRequired,
-}
+const mapStateToProps = state => ({})
 
-const mapStateToProps = state => ({
-  activePage: state.router.activePage,
-})
-
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(Actions, dispatch),
-})
+const mapDispatchToProps = dispatch => ({})
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage)

@@ -1,24 +1,25 @@
 import { combineReducers } from "redux"
 import { handleAction, handleActions } from "redux-actions"
-import { NEWS_LOAD, ARTICLE_LOAD, loadNews, loadArticle } from "../actions"
+import { NEWS_GET, ARTICLE_GET } from "../actions"
 import { News } from "../constants"
-import NewsFeed from "../components"
 
 // Reducers
 
 // const news = handleAction(NEWS_LOAD, (_, action) => action.payload, [])
-const news = handleAction(NEWS_LOAD, (_, action) => News, [])
+const news = handleAction(NEWS_GET, (_, { payload }) => [News[payload]], News)
+const article = handleAction(ARTICLE_GET, (_, { payload }) => News[payload], null)
 
-// const article = handleAction(ARTICLE_LOAD, (_, action) => News[action.payload], "")
+// const getNews = () => News
+// const getArticle = id => News[id] || null
 
 export default combineReducers({
   news,
-  // article,
+  article,
 })
 
 // Selectors
 
-export const getNews = state => state.news
+// export const getNews = state => state.news
 // export const getArticle = state => state.article
 
 // const isFetching = handleActions(

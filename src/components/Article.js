@@ -7,11 +7,16 @@ export default class Article extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      article: News[props.match.params.articleId],
+      // article: props.article,
+      article: News[props.match.params.id],
     }
   }
 
-  static propTypes = {}
+  componentDidMount() {
+    // this.props.getArticle(this.props.match.params.id)
+    console.log("article: " + this.state.article)
+    console.log("id: " + this.props.match.params.id)
+  }
 
   render() {
     const Article = styled.div`
@@ -81,37 +86,45 @@ export default class Article extends Component {
     `
 
     const ArticleNotFound = styled.div`
-      top: 7px;
+      padding: 7px;
       text-align: center;
-      font-size: 2vw;
-      position: relative;
+      font-size: 1.5vw;
     `
 
     const Content = () => {
-      const article = this.state.article
-      article.date =
-        this.state.article.date.substr(8, 2) +
-        "." +
-        this.state.article.date.substr(5, 2) +
-        "." +
-        this.state.article.date.substr(0, 4)
-      article.tags = this.state.article.tags.map((tag, idx) => {
-        return <ArticleMore key={idx}>{tag} </ArticleMore>
-      })
+      if (this.state.article !== null) {
+        const date =
+          this.state.article.date.substr(8, 2) +
+          "." +
+          this.state.article.date.substr(5, 2) +
+          "." +
+          this.state.article.date.substr(0, 4)
+        console.log("date: " + this.state.article.date)
 
-      return (
-        <Article key={article.id}>
-          <ArticlePreview src={article.preview} />
-          <ArticleMask>
-            <ArticleTitle>{article.title}</ArticleTitle>
-          </ArticleMask>
-          <ArticleDescription>{article.description}</ArticleDescription>
-          <ArticleInfoDiv position={"left"}>Тэги: {article.tags}</ArticleInfoDiv>
-          <ArticleInfoDiv position={"right"}>
-            Дата: <ArticleMore>{article.date}</ArticleMore>
-          </ArticleInfoDiv>
-        </Article>
-      )
+        const tags = this.state.article.tags.map((tag, idx) => {
+          return <ArticleMore key={idx}>{tag} </ArticleMore>
+        })
+
+        const article = this.state.article
+        article.date = date
+        article.tags = tags
+
+        return (
+          <Article>
+            <ArticlePreview src={article.preview} />
+            <ArticleMask>
+              <ArticleTitle>{article.title}</ArticleTitle>
+            </ArticleMask>
+            <ArticleDescription>{article.description}</ArticleDescription>
+            <ArticleInfoDiv position={"left"}>Тэги: {article.tags}</ArticleInfoDiv>
+            <ArticleInfoDiv position={"right"}>
+              Дата: <ArticleMore>{article.date}</ArticleMore>
+            </ArticleInfoDiv>
+          </Article>
+        )
+      } else {
+        return <ArticleNotFound>Новость не найдена.</ArticleNotFound>
+      }
     }
 
     return <div>{Content()}</div>

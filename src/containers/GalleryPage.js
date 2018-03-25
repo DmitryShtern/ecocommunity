@@ -7,19 +7,12 @@ import Header from "../components/Header"
 import * as Actions from "../actions"
 import { Link, browserHistory } from "react-router"
 
-const GalleryPage = ({ actions, activePage }) => <div>Gallery Page</div>
+const GalleryPage = ({}) => <div>Gallery Page</div>
 
-GalleryPage.propTypes = {
-  actions: PropTypes.object.isRequired,
-  activePage: PropTypes.string.isRequired,
-}
+GalleryPage.propTypes = {}
 
-const mapStateToProps = state => ({
-  activePage: state.router.activePage,
-})
+const mapStateToProps = state => ({})
 
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(Actions, dispatch),
-})
+const mapDispatchToProps = dispatch => ({})
 
 export default connect(mapStateToProps, mapDispatchToProps)(GalleryPage)

@@ -2,13 +2,12 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
-import { default as News } from "../constants/News"
 
 export default class NewsArticle extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      news: News,
+      news: props.news,
     }
   }
 
@@ -83,13 +82,13 @@ export default class NewsArticle extends Component {
     `
 
     const NewsNotFound = styled.div`
-      top: 7px;
+      padding: 7px;
       text-align: center;
-      font-size: 2vw;
-      position: relative;
+      font-size: 1.5vw;
     `
 
     const NewsArray = this.state.news.map(news => {
+      // const NewsArray = this.state.news.map(news => {
       // if (news.title.length > 50) {
       //   news.title = news.title.slice(0, 50) + "..."
       // }
@@ -110,21 +109,22 @@ export default class NewsArticle extends Component {
       return (
         <News key={news.id}>
           <NewsPreview src={news.preview} />
-          <NewsMask>
+          <NewsMask onClick={() => this.props.getNews(news.id)}>
             <NewsTitle>{news.title}</NewsTitle>
           </NewsMask>
           <NewsDescription>
             {description}
-            <NewsLink to={"/news/" + news.id} page={"/news/" + news.id}>
-              >Открыть новость
+            <NewsLink
+              to={"/news/" + news.id}
+              page={"/news/" + news.id}
+              onClick={() => this.props.getArticle(news.id)}
+            >
+              Открыть новость
             </NewsLink>
           </NewsDescription>
           <NewsInfoDiv position={"left"}>Тэги: {tags}</NewsInfoDiv>
           <NewsInfoDiv position={"right"}>
-            Дата:{" "}
-            <NewsLink to={"/news/" + news.id} page={"/news/" + news.id}>
-              {date}
-            </NewsLink>
+            Дата: <NewsLink to={""}>{date}</NewsLink>
           </NewsInfoDiv>
         </News>
       )
