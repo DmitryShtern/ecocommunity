@@ -1,14 +1,20 @@
 import React, { Component } from "react"
-import { Feed, Filter } from "../components"
+import { News, Filter } from "../components"
 
 class newsScreen extends Component {
+  componentWillMount() {
+    this.props.getNews(this.props.query)
+    console.log("news screen did mount")
+    console.log("query: " + this.props.query)
+  }
+
   render() {
-    const { news, article, getNews, getArticle } = this.props
+    const { news, isFetching } = this.props
 
     return (
       <div>
-        <Feed news={news} article={article} getNews={getNews} getArticle={getArticle} />
-        <Filter getNews={getNews} />
+        <News news={news} isFetching={isFetching} />
+        <Filter />
       </div>
     )
   }

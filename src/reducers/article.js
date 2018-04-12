@@ -1,19 +1,23 @@
 import { combineReducers } from "redux"
 import { handleAction, handleActions } from "redux-actions"
-import { NEWS_GET, ARTICLE_GET } from "../actions"
-import { News } from "../constants"
+import { ARTICLE_GET, ARTICLE_SET } from "../actions"
+// import { News } from "../constants"
 
 // Reducers
 
 // const news = handleAction(NEWS_LOAD, (_, action) => action.payload, [])
-const news = handleAction(NEWS_GET, (_, { payload }) => [News[payload]], News)
-const article = handleAction(ARTICLE_GET, (_, { payload }) => News[payload], null)
+const isFetching = handleActions(
+  {
+    [ARTICLE_GET]: () => true,
+    [ARTICLE_SET]: () => false,
+  },
+  false,
+)
 
-// const getNews = () => News
-// const getArticle = id => News[id] || null
+const article = handleAction(ARTICLE_SET, (_, { payload }) => payload, null)
 
 export default combineReducers({
-  news,
+  isFetching,
   article,
 })
 

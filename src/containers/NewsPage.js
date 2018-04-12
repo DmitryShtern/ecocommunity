@@ -1,10 +1,11 @@
 import { connect } from "react-redux"
 import { getNews, getArticle } from "../actions"
-import { NewsScreen } from "../screens"
+import { newsScreen } from "../screens"
 
 const mapStateToProps = state => ({
-  news: state.newsFeed.news,
-  article: state.newsFeed.article,
+  news: state.news.news,
+  isFetching: state.news.isFetching,
+  query: state.routing.location.search,
 })
 
 const mapDispatchToProps = {
@@ -12,4 +13,4 @@ const mapDispatchToProps = {
   getArticle,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewsScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(newsScreen)

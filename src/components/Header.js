@@ -6,19 +6,23 @@ import { NavMenuButtons } from "../constants/NavMenuButtons"
 
 export default class Header extends Component {
   static propTypes = {
-    changeActivePage: PropTypes.func.isRequired,
+    // changeActivePage: PropTypes.func.isRequired,
     activePage: PropTypes.string.isRequired,
   }
 
-  handleChangeActivePage = activePage => {
-    this.props.changeActivePage(activePage)
-  }
+  // handleChangeActivePage = activePage => {
+  //   this.props.changeActivePage(activePage)
+  // }
 
   render() {
     // STYLED CONTAINER //
 
     const getColor = (props, type) => {
-      const isActivePage = props.page === this.props.activePage
+      const isActivePage = props.page.indexOf(this.props.activePage) !== -1
+
+      console.log("this.props.activePage: " + this.props.activePage)
+      console.log("props.page: " + props.page)
+
       switch (type) {
         case "background":
           return isActivePage ? "#5bad5f" : "#444"
@@ -69,7 +73,7 @@ export default class Header extends Component {
         <NavLink
           to={button.link}
           page={button.link}
-          onClick={() => this.handleChangeActivePage(button.link)}
+          // onClick={() => this.handleChangeActivePage(button.link)}
         >
           {button.label}
         </NavLink>

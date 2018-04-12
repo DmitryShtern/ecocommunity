@@ -5,8 +5,15 @@ import { Provider } from "react-redux"
 import { connect } from "react-redux"
 import { Switch, Route } from "react-router-dom"
 
-import { Header, Article } from "./components"
-import { MainPage, NewsPage, ServicesPage, GalleryPage, NewspaperPage } from "./containers"
+import { Header } from "./components"
+import {
+  MainPage,
+  NewsFeedPage,
+  ArticlePage,
+  ServicesPage,
+  GalleryPage,
+  NewspaperPage,
+} from "./containers"
 // import { changeActivePage } from "../actions"
 import { Link, browserHistory } from "react-router"
 
@@ -15,8 +22,8 @@ const App = () => (
     <Header />
     <Switch>
       <Route path="/" component={MainPage} />
-      <Route path="/news/:id" component={Article} />
-      <Route path="/news" component={NewsPage} />
+      <Route path="/news" component={NewsFeedPage} />
+      <Route path="/news/:id" component={ArticlePage} />
       <Route path="/services" component={ServicesPage} />
       <Route path="/gallery" component={GalleryPage} />
       <Route path="/newspaper" component={NewspaperPage} />

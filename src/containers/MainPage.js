@@ -9,7 +9,7 @@ import { LastNewsSlider, About, Contacts } from "../components"
 const MainPage = ({ actions, activePage }) => (
   <div>
     Main Page
-    <LastNewsSlider />
+    {/* <LastNewsSlider /> */}
     <About />
     <Contacts />
     <div />

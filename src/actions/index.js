@@ -1,2 +1,3 @@
 export * from "./header"
-export * from "./newsFeed"
+export * from "./news"
+export * from "./article"

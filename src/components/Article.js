@@ -8,17 +8,17 @@ export default class Article extends Component {
     super(props)
     this.state = {
       // article: props.article,
-      article: News[props.match.params.id],
+      article: props.article, // News[props.id],
+      isFetching: props.isFetching,
     }
   }
 
-  componentDidMount() {
-    // this.props.getArticle(this.props.match.params.id)
-    console.log("article: " + this.state.article)
-    console.log("id: " + this.props.match.params.id)
-  }
-
   render() {
+    const { article, isFetching } = this.props
+
+    console.log("Article.js article: " + JSON.stringify(article))
+    console.log("Article.js isFetching: " + isFetching)
+
     const Article = styled.div`
       margin: 50px 5%;
       padding-bottom: 50px;
@@ -91,42 +91,49 @@ export default class Article extends Component {
       font-size: 1.5vw;
     `
 
-    const Content = () => {
-      if (this.state.article !== null) {
-        const date =
-          this.state.article.date.substr(8, 2) +
-          "." +
-          this.state.article.date.substr(5, 2) +
-          "." +
-          this.state.article.date.substr(0, 4)
-        console.log("date: " + this.state.article.date)
+    const NewsArticle = () => {
+      const date =
+        article.date.substr(8, 2) +
+        "." +
+        article.date.substr(5, 2) +
+        "." +
+        article.date.substr(0, 4)
+      console.log("date: " + article.date)
 
-        const tags = this.state.article.tags.map((tag, idx) => {
-          return <ArticleMore key={idx}>{tag} </ArticleMore>
-        })
+      const tags =
+        article.tags === null
+          ? ""
+          : article.tags.map((tag, idx) => {
+              return <ArticleMore key={idx}>{tag} </ArticleMore>
+            })
 
-        const article = this.state.article
-        article.date = date
-        article.tags = tags
+      article.date = date
+      article.tags = tags
 
-        return (
-          <Article>
-            <ArticlePreview src={article.preview} />
-            <ArticleMask>
-              <ArticleTitle>{article.title}</ArticleTitle>
-            </ArticleMask>
-            <ArticleDescription>{article.description}</ArticleDescription>
-            <ArticleInfoDiv position={"left"}>Тэги: {article.tags}</ArticleInfoDiv>
-            <ArticleInfoDiv position={"right"}>
-              Дата: <ArticleMore>{article.date}</ArticleMore>
-            </ArticleInfoDiv>
-          </Article>
-        )
-      } else {
-        return <ArticleNotFound>Новость не найдена.</ArticleNotFound>
-      }
+      return (
+        <Article>
+          <ArticlePreview src={article.preview} />
+          <ArticleMask>
+            <ArticleTitle>{article.title}</ArticleTitle>
+          </ArticleMask>
+          <ArticleDescription>{article.description}</ArticleDescription>
+          {tags === null ? <ArticleInfoDiv position={"left"}>Тэги: {tags}</ArticleInfoDiv> : ""}
+          {/* <ArticleInfoDiv position={"left"}>Тэги: {article.tags}</ArticleInfoDiv> */}
+          <ArticleInfoDiv position={"right"}>
+            Дата: <ArticleMore>{article.date}</ArticleMore>
+          </ArticleInfoDiv>
+        </Article>
+      )
     }
 
-    return <div>{Content()}</div>
+    const content = isFetching ? (
+      <ArticleNotFound>Загрузка...</ArticleNotFound>
+    ) : article !== null ? (
+      NewsArticle()
+    ) : (
+      <ArticleNotFound>Новость не найдена.</ArticleNotFound>
+    )
+
+    return content
   }
 }
