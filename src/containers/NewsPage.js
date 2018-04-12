@@ -1,24 +1,16 @@
-import React from "react"
-import PropTypes from "prop-types"
-import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
-
-import * as Actions from "../actions"
-import { Link, browserHistory } from "react-router"
-
-const NewsPage = ({ actions, activePage }) => <div>News Page</div>
-
-NewsPage.propTypes = {
-  actions: PropTypes.object.isRequired,
-  activePage: PropTypes.string.isRequired,
-}
+import { getNews, getArticle } from "../actions"
+import { newsScreen } from "../screens"
 
 const mapStateToProps = state => ({
-  activePage: state.router.activePage,
+  news: state.news.news,
+  isFetching: state.news.isFetching,
+  query: state.routing.location.search,
 })
 
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(Actions, dispatch),
-})
+const mapDispatchToProps = {
+  getNews,
+  getArticle,
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewsPage)
+export default connect(mapStateToProps, mapDispatchToProps)(newsScreen)

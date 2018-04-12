@@ -6,27 +6,27 @@
 
 export const NavMenuButtons = [
   {
-    link: "",
+    link: "/",
     label: "Главная",
     float: "left",
   },
   {
-    link: "news",
+    link: "/news",
     label: "Новости",
     float: "left",
   },
   {
-    link: "services",
+    link: "/services",
     label: "Услуги",
     float: "left",
   },
   {
-    link: "gallery",
+    link: "/gallery",
     label: "Галерея",
     float: "left",
   },
   {
-    link: "newspaper",
+    link: "/newspaper",
     label: "Экологическая газета",
     float: "right",
   },

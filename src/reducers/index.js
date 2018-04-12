@@ -1,12 +1,14 @@
 import { combineReducers } from "redux"
 import { routerReducer } from "react-router-redux"
-import router from "./router"
-import todos from "./todos"
+import header from "./header"
+import news from "./news"
+import article from "./article"
 
 const rootReducer = combineReducers({
   routing: routerReducer,
-  router,
-  todos,
+  header,
+  news,
+  article,
 })
 
 export default rootReducer

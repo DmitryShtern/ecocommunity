@@ -1,18 +1,14 @@
 import React, { Component } from "react"
 import styled from "styled-components"
 
-import image1 from "./slider/images/image1.jpg"
-import image2 from "./slider/images/image2.jpg"
-import image3 from "./slider/images/image3.jpg"
-import image4 from "./slider/images/image4.jpg"
-import image5 from "./slider/images/image5.jpg"
+import { LastNewsImages } from "../constants/images"
 
 export default class LastNewsSlider extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      images: [image1, image2, image3, image4, image5],
-      currentImage: image1,
+      images: LastNewsImages,
+      currentImage: LastNewsImages[0],
       autoplayIndex: 0,
     }
   }
@@ -46,6 +42,7 @@ export default class LastNewsSlider extends Component {
 
   autoplaySlider = () => {
     clearTimeout(this.state.autoplayIndex)
+
     this.setState({ autoplayIndex: setTimeout(this.changeCurrentImage, 3000, 1) })
   }
 
@@ -64,56 +61,6 @@ export default class LastNewsSlider extends Component {
       position: relative;
     `
 
-    const Slide = styled.img`
-      display: ${props => getDisplay(props.src)};
-      width: 100%;
-      height: 500px;
-      object-fit: cover;
-      animation: fading 3s infinite;
-
-      @keyframes fading {
-        0% {
-          opacity: 0;
-        }
-        15% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 1;
-        }
-        85% {
-          opacity: 1;
-        }
-        100% {
-          opacity: 0;
-        }
-      }
-    `
-
-    const Mask = styled.div`
-      background: linear-gradient(#0001, #0007);
-      color: #fff;
-      font-size: 2em;
-      height: 500px;
-      width: 100%;
-      position: absolute;
-      top: 0;
-      cursor: pointer;
-      display: ${props => getDisplay(props.src)};
-    `
-
-    const SliderLabel = styled.label`
-      position: absolute;
-      left: 50px;
-      bottom: 50px;
-      color: #fff;
-      cursor: pointer;
-
-      :hover {
-        text-decoration: underline;
-      }
-    `
-
     const SliderNavigation = styled.div`
       margin: 0 auto;
       width: 100%;
@@ -123,7 +70,7 @@ export default class LastNewsSlider extends Component {
       bottom: 0;
     `
 
-    const Dot = styled.button`
+    const SliderDot = styled.button`
       width: 20px;
       height: 20px;
       margin: 15px 5px;
@@ -164,17 +111,67 @@ export default class LastNewsSlider extends Component {
       }
     `
 
+    const Slide = styled.img`
+      display: ${props => getDisplay(props.src)};
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      animation: fading 3s infinite;
+
+      @keyframes fading {
+        0% {
+          opacity: 0;
+        }
+        15% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 1;
+        }
+        85% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+    `
+
+    const SlideMask = styled.div`
+      background: linear-gradient(#0001, #0007);
+      color: #fff;
+      font-size: 2em;
+      height: 500px;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      cursor: pointer;
+      display: ${props => getDisplay(props.src)};
+    `
+
+    const SlideLabel = styled.label`
+      position: absolute;
+      left: 50px;
+      bottom: 50px;
+      color: #fff;
+      cursor: pointer;
+
+      :hover {
+        text-decoration: underline;
+      }
+    `
+
     const SliderDots = this.state.images.map((image, idx) => (
-      <Dot key={idx} src={image} onClick={() => this.setCurrentImage(image)} />
+      <SliderDot key={idx} src={image} onClick={() => this.setCurrentImage(image)} />
     ))
 
     const SliderImages = this.state.images.map((image, idx) => {
       return (
         <div key={idx}>
           <Slide src={image} />
-          <Mask src={image} onClick={() => console.log("click on mask")}>
-            <SliderLabel>label #{idx}</SliderLabel>
-          </Mask>
+          <SlideMask src={image} onClick={() => console.log("click on mask")}>
+            <SlideLabel>label #{idx}</SlideLabel>
+          </SlideMask>
         </div>
       )
     })
@@ -183,7 +180,7 @@ export default class LastNewsSlider extends Component {
       <div>
         "Slider"
         <Content>
-          <Slider style={{ "123": "456" }}>
+          <Slider>
             <div>{SliderImages}</div>
 
             <SliderNavigation>
