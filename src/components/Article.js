@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 import { News } from "../constants"
+// import { history } from "../store/configureStore"
 
 export default class Article extends Component {
   constructor(props) {
@@ -14,13 +15,16 @@ export default class Article extends Component {
   }
 
   render() {
-    const { article, isFetching } = this.props
+    console.log("article history: " + JSON.stringify(history))
 
-    console.log("Article.js article: " + JSON.stringify(article))
-    console.log("Article.js isFetching: " + isFetching)
+    const { article, isFetching, history } = this.props
+
+    // console.log("Article.js article: " + JSON.stringify(article))
+    // console.log("Article.js isFetching: " + isFetching)
 
     const Article = styled.div`
-      margin: 50px 5%;
+      margin: 0 5% 60px;
+      width: 65%;
       padding-bottom: 50px;
       background-color: #333;
       color: #fff;
@@ -42,6 +46,36 @@ export default class Article extends Component {
       height: 400px;
       position: absolute;
       top: 0;
+    `
+
+    const ArticleBackButton = styled.label`
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      border: none;
+      color: #fff;
+      font-size: 1.5vw;
+      text-align: center;
+      cursor: pointer;
+      text-shadow: 1px 1px #000, -1px 1px #000, -1px 0 #000, -1px -1px #000, 1px -1px #000,
+        1px 0px #000;
+
+      :hover {
+        text-decoration: underline;
+      }
+
+      :active {
+        color: #57bf5d;
+      }
+    `
+
+    const ArticleFullScreen = styled.label`
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #fff;
+      font-size: 1.5vw;
+      text-align: center;
       cursor: pointer;
     `
 
@@ -51,11 +85,6 @@ export default class Article extends Component {
       bottom: 20px;
       font-size: 2.1vw;
       color: #fff;
-      cursor: pointer;
-
-      :hover {
-        text-decoration: underline;
-      }
     `
 
     const ArticleDescription = styled.div`
@@ -98,29 +127,30 @@ export default class Article extends Component {
         article.date.substr(5, 2) +
         "." +
         article.date.substr(0, 4)
-      console.log("date: " + article.date)
 
       const tags =
         article.tags === null
-          ? ""
-          : article.tags.map((tag, idx) => {
-              return <ArticleMore key={idx}>{tag} </ArticleMore>
-            })
+          ? null
+          : article.tags.split(", ").map((tag, idx) => <ArticleMore key={idx}>{tag}</ArticleMore>)
 
-      article.date = date
-      article.tags = tags
+      if (tags !== null) {
+        for (let i = 0; i < tags.length - 1; i += 2) {
+          tags.splice(i + 1, 0, ", ")
+        }
+      }
 
       return (
         <Article>
           <ArticlePreview src={article.preview} />
           <ArticleMask>
+            <ArticleBackButton onClick={() => history.goBack()}>&#10094; Назад</ArticleBackButton>
             <ArticleTitle>{article.title}</ArticleTitle>
+            <ArticleFullScreen>[ ]</ArticleFullScreen>
           </ArticleMask>
           <ArticleDescription>{article.description}</ArticleDescription>
-          {tags === null ? <ArticleInfoDiv position={"left"}>Тэги: {tags}</ArticleInfoDiv> : ""}
-          {/* <ArticleInfoDiv position={"left"}>Тэги: {article.tags}</ArticleInfoDiv> */}
+          {tags !== null ? <ArticleInfoDiv position={"left"}>Тэги: {tags}</ArticleInfoDiv> : ""}
           <ArticleInfoDiv position={"right"}>
-            Дата: <ArticleMore>{article.date}</ArticleMore>
+            Дата: <ArticleMore>{date}</ArticleMore>
           </ArticleInfoDiv>
         </Article>
       )

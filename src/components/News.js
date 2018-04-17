@@ -12,16 +12,12 @@ export default class News extends Component {
     }
   }
 
-  // static propTypes = {}
-
   render() {
     const { news, isFetching } = this.props
 
-    console.log("News.js news: " + news)
-    console.log("News.js isFetching: " + isFetching)
-
     const News = styled.div`
-      margin: 50px 5%;
+      margin: 0 5% 60px;
+      width: 65%;
       height: 500px;
       background-color: #333;
       color: #fff;
@@ -56,6 +52,12 @@ export default class News extends Component {
 
       :hover {
         text-decoration: underline;
+        color: #ccc;
+      }
+
+      :active {
+        text-decoration: none;
+        color: #fff;
       }
     `
 
@@ -64,6 +66,20 @@ export default class News extends Component {
       height: 165px;
       color: #fff;
       font-size: 1.2vw;
+    `
+
+    const NewsMore = styled.label`
+      color: #57bf5d;
+      cursor: pointer;
+
+      :hover {
+        color: #49d851;
+        text-decoration: underline;
+      }
+
+      :active {
+        color: #478e4a;
+      }
     `
 
     const NewsLink = styled(Link)`
@@ -98,34 +114,42 @@ export default class News extends Component {
         news.description.length > 400
           ? news.description.slice(0, 400) + "... "
           : news.description + " "
+
       const date =
         news.date.substr(8, 2) + "." + news.date.substr(5, 2) + "." + news.date.substr(0, 4)
+
       const tags =
         news.tags === null
-          ? ""
-          : news.tags.map((tag, idx) => {
-              return (
-                <NewsLink key={idx} to={"/news/" + news.id} page={"/news/" + news.id}>
-                  {tag}
-                </NewsLink>
-              )
-            })
+          ? null
+          : news.tags.split(", ").map((tag, idx) => (
+              <NewsMore key={idx} to={"/news/" + news.id} page={"/news/" + news.id}>
+                {tag}
+              </NewsMore>
+            ))
+
+      if (tags !== null) {
+        for (let i = 0; i < tags.length - 1; i += 2) {
+          tags.splice(i + 1, 0, ", ")
+        }
+      }
 
       return (
         <News key={news.id}>
           <NewsPreview src={news.preview} />
-          <NewsMask>
-            <NewsTitle>{news.title}</NewsTitle>
-          </NewsMask>
+          <Link to={"/news/" + news.id} page={"/news/" + news.id}>
+            <NewsMask>
+              <NewsTitle>{news.title}</NewsTitle>
+            </NewsMask>
+          </Link>
           <NewsDescription>
             {description}
             <NewsLink to={"/news/" + news.id} page={"/news/" + news.id}>
               Открыть новость
             </NewsLink>
           </NewsDescription>
-          {tags === null ? <NewsInfoDiv position={"left"}>Тэги: {tags}</NewsInfoDiv> : ""}
+          {tags !== null ? <NewsInfoDiv position={"left"}>Тэги: {tags}</NewsInfoDiv> : ""}
           <NewsInfoDiv position={"right"}>
-            Дата: <NewsLink to={""}>{date}</NewsLink>
+            Дата: <NewsMore to={""}>{date}</NewsMore>
           </NewsInfoDiv>
         </News>
       )

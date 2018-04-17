@@ -10,6 +10,8 @@ import { Link, browserHistory } from "react-router"
 
 class App extends Component {
   render() {
+    console.log("app this.props.history: " + this.props.history)
+
     const { activePage } = this.props
 
     return (

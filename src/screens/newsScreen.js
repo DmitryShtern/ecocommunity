@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { News, Filter } from "../components"
+import styled from "styled-components"
 
 class newsScreen extends Component {
   componentWillMount() {
@@ -11,11 +12,15 @@ class newsScreen extends Component {
   render() {
     const { news, isFetching } = this.props
 
+    const Feed = styled.div`
+      margin: 60px 0;
+    `
+
     return (
-      <div>
-        <News news={news} isFetching={isFetching} />
+      <Feed>
         <Filter />
-      </div>
+        <News news={news} isFetching={isFetching} />
+      </Feed>
     )
   }
 }

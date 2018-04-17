@@ -29,7 +29,6 @@ export default class Filter extends Component {
     // }
 
     const Filter = styled.div`
-      margin: 3% 0;
       width: 20%;
       height: 400px;
       background-color: #f9f9e0;
